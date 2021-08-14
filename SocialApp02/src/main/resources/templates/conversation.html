@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head" th:remove="tag">
+<body>
+	<div th:include="fragments/body :: headline (txt='You may start chatting if you like to' )"></div>
+	<section class="container">	
+		<div class="section-title h5">Conversations</div>
+		<br>
+		<table class="table table-hover table-bordered table-sm" th:if="${listAllConversations != null}">
+		<thead class="thead-light">
+			<tr>
+				<th scope="col">your chats</th>
+				<th scope="col"></th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="conversation : ${listAllConversations}">
+				<td>
+					<div th:name="modelAttr">
+						<span th:text="${conversation.conversationWith}"></span> 
+						<span th:if="${conversation.newMessages > 0}" class="label label-primary" th:text="${conversation.newMessages}">NEW</span>
+					</div>
+				</td>
+				<td>
+					<form th:action="@{/messages(from=${fromUser},to=${conversation.conversationWith}) }" method="post">
+						<input type="submit" class="btn btn-outline-primary btn-sm" value="chat with">
+					</form>
+				</td>
+				<td>
+					<form th:action="@{/deleteConversation(from=${fromUser},to=${conversation.conversationWith}) }" method="post">
+						<input type="submit" class="btn btn-outline-danger btn-sm" value="delete">
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	</section>
+	<br>
+	<div th:include="fragments/footer :: footer"></div>
+	<script>
+		var date = new Date();
+		var year = date.getFullYear();
+		document.getElementById("today").innerHTML = "&copy; FRA-UAS SocialApp, "+year;
+	</script> 
+</body>
+</html>

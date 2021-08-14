@@ -65,7 +65,7 @@ public class InitializeDB {
         messageRepository.save(message1);
         conversation1.addMessages(message1);
             
-        Message message2 = new Message("Hallo Bob", timestamp30, "in");
+        Message message2 = new Message("Hello Bob", timestamp30, "in");
         messageRepository.save(message2);            
         conversation2.addMessages(message2);            
 

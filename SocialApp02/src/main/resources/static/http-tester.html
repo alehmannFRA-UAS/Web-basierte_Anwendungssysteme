@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Simple HTTP Tester</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="/css/all.css">
+	<!-- JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="/js/jquery-3.5.1.slim.min.js"></script>
+	<script src="/js/popper.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<br>
+		<header>
+			<h3 class="text-center">Simple HTTP Tester</h3>
+		</header>
+		<br>
+  		<div class="form-group row">
+    		<label for="method" class="col-4 col-form-label">HTTP Method</label> 
+    		<div class="col-8">
+      			<select id="method" name="method" class="custom-select" aria-describedby="methodHelpBlock" required="required">
+       				<option value="GET">GET</option>
+        			<option value="POST">POST</option>
+        			<option value="PUT">PUT</option>
+        			<option value="PATCH">PATCH</option>
+        			<option value="DELETE">DELETE</option>
+      			</select> 
+      			<span id="methodHelpBlock" class="form-text text-muted">Please choose an HTTP Method</span>
+    		</div>
+  		</div>
+		<div class="form-group row">
+			<label for="url" class="col-4 col-form-label">URL</label> 
+		    <div class="col-8">
+		    	<input id="url" name="url" placeholder="http://localhost:8080/" type="text" class="form-control" aria-describedby="urlHelpBlock" required="required">
+		      	<span id="urlHelpBlock" class="form-text text-muted">Please type an URL</span>
+		    </div>
+		</div>
+		<div class="form-group row">
+		    <label for="content" class="col-4 col-form-label">HTTP Content</label> 
+		    <div class="col-8">
+		    	<input id="content" name="content" placeholder="name=value" type="text" class="form-control" aria-describedby="contentHelpBlock"> 
+		      	<span id="contentHelpBlock" class="form-text text-muted">Here you may add content</span>
+		    </div>
+		</div> 
+		<div class="form-group row">
+		    <div class="offset-4 col-8">
+		      	<button onclick="sendForm()">Send Request</button>
+		    </div>
+		</div>
+		
+		
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="card">
+					<div class="card-header">HTTP Response</div>		
+					<div id="responseHttp" class="card-body">
+			
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="card">
+					<div class="card-header">Rendered HTML Response</div>		
+					<div id="responseHtml" class="card-body">
+			
+					</div>
+				</div>			
+			</div>
+		</div>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<footer>
+				<small id="today"></small>
+			</footer>
+		</nav>
+	</div>
+<!-- AJAX -->
+<script>
+function sendForm() {
+	var contentType = "application/x-www-form-urlencoded";
+	var url = document.getElementById('url').value;
+	var method = document.getElementById('method').value;
+	var content = document.getElementById('content').value;
+
+	// AJAX
+	var xmlhttp = new XMLHttpRequest();				
+	if(method !== "GET"){		
+		xmlhttp.onprogress = function () {
+			console.log('LOADING: ', xmlhttp.status);
+		};
+		xmlhttp.onload = function () {
+			if (xmlhttp.readyState == 4) {
+				console.log(xmlhttp.responseText);
+				console.log('DONE: ', xmlhttp.status);
+				document.getElementById('responseHttp').innerHTML = xmlhttp.status + '<br>' + xmlhttp.getAllResponseHeaders().replaceAll('\r\n', '<br>');
+				document.getElementById('responseHtml').innerHTML = xmlhttp.responseText;
+			}
+		}
+		xmlhttp.open(method, url, true);
+		xmlhttp.setRequestHeader('Content-Type',contentType);
+		xmlhttp.send(content);
+	} else {
+		xmlhttp.onprogress = function () {
+			console.log('LOADING: ', xmlhttp.status);
+		};
+		xmlhttp.onload = function () {
+			if (xmlhttp.readyState == 4) {
+				console.log(xmlhttp.responseText)
+				console.log('DONE: ', xmlhttp.status);
+				document.getElementById('responseHttp').innerHTML = xmlhttp.status + '<br>' + xmlhttp.getAllResponseHeaders().replaceAll('\r\n', '<br>');
+				document.getElementById('responseHtml').innerHTML = xmlhttp.responseText;
+			}
+		};
+		xmlhttp.open(method, url, true);
+		xmlhttp.send();
+	}
+}
+
+var date = new Date();
+var year = date.getFullYear();
+document.getElementById("today").innerHTML = "&copy; FRA-UAS Web-basierte Anwendungssysteme, "+year;
+</script>
+
+</body>
+</html>
