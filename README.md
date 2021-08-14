@@ -2,10 +2,12 @@
 
 ## Inhalt 
 
-1. Erste Übungen:
+1. Erste Ãœbungen:
     - BeanBeispiel
     - BeanBeispielExtended
     - BeanBeispielExtendedLogging
     - BeanBeispielExtendedTesting
     - SocialApp01
-2. Zweite Übungen
+2. Zweite Ãœbungen
+    - SocialApp02
+4. Dritte Ãœbungen
