@@ -10,4 +10,11 @@
     - SocialApp01
 2. Zweite Übungen
     - SocialApp02
-4. Dritte Übungen
+3. Dritte Übungen
+    - SpringIoC
+	- SpringApplicationContext
+	- SpringBeanLifeCycle
+	- SpringCompleteBeanLifeCycle
+	- SpringDependencyInjection
+	- SpringScopes
+3. Vierte Übungen
