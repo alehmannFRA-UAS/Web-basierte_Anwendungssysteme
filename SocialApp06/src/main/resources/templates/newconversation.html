@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head">
+	<meta charset="utf-8">
+</head>
+	<body>
+
+		<div th:include="fragments/body :: headline (txt='What can i do for you?' )"></div>
+		<div th:include="fragments/body :: nav (all=false)"></div>
+
+
+		<div class="container">
+			<h5>enter new contact ...</h5>
+			<form th:action="@{/newconversation}" method="post">
+				<div class="error">
+					<input class="form-control" type="text" name="nid">
+					<br>
+					<input type="submit" class="btn btn-outline-primary" value="new conversation">
+					<span class="error text-danger" th:if="${error != null}" th:text="${error}">ERROR_PLACEHOLDER</span>
+				</div>
+			</form>
+
+			<br>
+			<h5>all your conversations</h5>
+			<ul class="list-group">
+				<li th:each="conversation : ${listAllConversations}" class="list-group-item">
+					<label th:text="${conversation.conversationWith}">conversation</label>
+				</li>
+			</ul>
+		</div>
+
+		<br>
+		<div th:include="fragments/footer :: footer"></div>
+		<script>
+			var date = new Date();
+			var year = date.getFullYear();
+			document.getElementById("today").innerHTML = "&copy; FRA-UAS SocialApp, "+year;
+		</script> 
+	</body>
+
+</html>

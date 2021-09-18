@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<head th:include="fragments/header :: head">
+</head>
+<body>
+	<div th:include="fragments/body :: headline (txt='have fun chatting' )"></div>
+	<div th:include="fragments/body :: nav (all=false)"></div>
+	
+	<div class="container">
+		<h5>
+			<span th:text="${'Conversation with ' +  toUser}">PLACEHOLDER</span>
+		</h5>
+		<table th:if="${listAllMessages != null}" class="table table-hover table-bordered table-fixed">
+			<thead>
+				<tr>
+					<th scope="col">message &nbsp;<i class="fas fa-arrow-circle-right"></i></th>
+					<th scope="col">message &nbsp;<i class="fas fa-arrow-circle-left"></i></th>
+					<th scope="col">time</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="message : ${listAllMessages}">
+					<td th:if="${message.direction.equals('out')}" class="word-wrap" th:text="${message.content}">empty</td>
+					<td></td>
+					<td th:if="${message.direction.equals('in')}" class="word-wrap" th:text="${message.content}">empty</td>
+					<td th:text="${message.timestamp}">empty</td>
+				</tr>
+			</tbody>
+		</table>
+		<h5>Your message</h5>
+		<form th:action="@{/add(to=${toUser}) }" method="post">
+			<input class="form-control" type="text" name="content" required>
+			<br>
+			<input type="submit" class="btn btn-outline-primary btn-sm" value="your message">
+		</form>
+	</div>
+	<br>
+	<div th:include="fragments/footer :: footer"></div>
+	<script>
+		var date = new Date();
+		var year = date.getFullYear();
+		document.getElementById("today").innerHTML = "&copy; FRA-UAS SocialApp, "+year;
+	</script> 
+</body>
+</html>

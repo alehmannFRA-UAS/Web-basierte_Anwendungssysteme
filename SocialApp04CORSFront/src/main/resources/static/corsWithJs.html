@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>CORS JS</title>
+	<script>
+		function sendForm() {
+			var req = new XMLHttpRequest();
+			req.open('GET', 'http://localhost:9090/users/1/', true);
+			req.onreadystatechange = function () {
+				if (req.readyState === 4) {
+					console.log(req.responseText);
+					document.getElementById('responseHtml').innerHTML = req.responseText;
+				}
+			};
+			req.send();
+		}
+	</script>	
+</head>
+<body>
+	<div>
+		<h1>CORS Problem</h1>
+		<br>
+	</div>
+	<button onclick="sendForm()">Send Request</button>
+	<br>
+	<div id="responseHtml">
+		<!-- here the HTML will be displayed -->		
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head">
+	<meta charset="utf-8">
+</head>
+<body>
+
+	<div th:include="fragments/body :: headline (txt='your profile' )"></div>
+	<div th:include="fragments/body :: nav (all=false)"></div>
+
+	<div class="container">
+		<table class="table table-hover table-bordered table-sm">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">user details</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>nickname</td>
+					<td th:text="${user.nickname}">nickname</td>
+				</tr>
+				<tr>
+					<td>email</td>
+					<td th:text="${user.email}">email</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+	<div th:include="fragments/footer :: footer"></div>
+		<script>
+			var date = new Date();
+			var year = date.getFullYear();
+			document.getElementById("today").innerHTML = "&copy; FRA-UAS SocialApp, "+year;
+		</script> 
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+		<table th:if="${listAllMessages != null}"
+			class="table table-hover table-bordered table-fixed">
+			<thead>
+				<tr>
+					<th scope="col">message &nbsp;<i class="fas fa-arrow-circle-right"></i></th>
+					<th scope="col">message &nbsp;<i class="fas fa-arrow-circle-left"></i></th>
+					<th scope="col">time</th>
+					<th scope="col">read</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="message : ${listAllMessages}">
+					<td th:if="${message.direction.equals('out')}" class="word-wrap" th:text="${message.content}">empty</td>
+					<td></td>
+					<td th:if="${message.direction.equals('in')}" class="word-wrap" th:text="${message.content}">empty</td>
+					<td th:text="${message.timestamp}">empty</td>
+					<td th:if="${message.direction.equals('out') }" th:text="${message.read}">empty</td>
+					<td th:unless="${message.direction.equals('out') }"></td>
+				</tr>
+			</tbody>
+		</table>
+
+</html>

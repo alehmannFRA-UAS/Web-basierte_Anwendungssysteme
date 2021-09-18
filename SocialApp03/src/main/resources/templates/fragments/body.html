@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+	<div th:fragment="headline (txt)">
+		<div class="container">
+		<br>
+		<header>
+		<h5 class="text-center">
+			Welcome,  
+			<span th:if="${fromUser != null}" th:text="${fromUser}"></span>
+			<br>
+			<span th:if="${txt != null}" th:text="${txt}"></span>
+		</h5>
+		</header>
+		<br>
+		</div>
+	</div>
+	
+	<div th:fragment="nav (all)">
+		<div class="container">
+			<nav class="navbar navbar-expand-md navbar-light bg-custom">
+				<a class="navbar-brand p-1 mr-5">SocialApp</a>
+				<div class="collapse navbar-collapse " id="thenavbarDefault">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item navbar-nav p-1" th:if="${all == true}">
+							<form class="form-inline" th:action="@{/newconversation}" method="post">
+								<input type="hidden" id="nid" name="nid"> <input type="submit" class="btn btn-outline-primary"	value="new conversation">
+							</form>
+						</li>
+						<li class="nav-item navbar-nav p-1" th:if="${all == true}">
+							<form th:action="@{'/users/' + ${currentUser.id}}" method="post">
+								<input type="submit" class="btn btn-outline-secondary"	value="profile">
+							</form>
+						</li>
+						<li class="nav-item navbar-nav p-1"
+							th:if="${all == true and #strings.toString(currentUser.user.role) == 'ADMIN'}">
+							<form th:action="@{/users/managed}" method="post">
+								<input type="submit" class="btn btn-outline-secondary" value="managed users">
+							</form>
+						</li>
+						<li class="nav-item navbar-nav p-1" th:if="${all != true}">
+							<form th:action="@{/start}" method="post">
+								<input type="hidden" name="fromUser" id="fromUser" th:value="${currentUser.nickname}">
+								<input type="submit" class="btn btn-outline-dark" th:value="ready">
+							</form>
+						</li>
+						<li class="nav-item navbar-nav p-1" th:if="${currentUser != null}">
+							<form th:action="@{/logout}" method="post">
+								<input type="submit" class="btn btn-outline-success" value="logout">
+							</form>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<br>
+	</div>
+
+	<div th:fragment="greeting (all)">
+		<div class="container">
+			<h5>
+			Hello <span th:if="${fromUser != null}" th:text="${fromUser}">unknown</span>
+			</h5>
+		<div>What can I do for you?</div>
+		<br>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head">
+<body>
+	<div th:include="fragments/body :: headline (txt='You may start chatting if you like to' )"></div>
+	<div th:include="fragments/body :: nav (all=true)"></div>
+	
+	<section class="container">	
+		<div class="section-title h5">Your conversations with</div>
+		<br>
+		<table class="table table-hover table-bordered" th:if="${listAllConversations != null}">
+			<tbody>
+				<tr th:each="conversation : ${listAllConversations}">
+					<td>
+						<div>
+							<span th:text="${conversation.conversationWith}"></span> 
+						</div>
+					</td>
+					<td>
+						<form th:action="@{/messages(to=${conversation.conversationWith}) }" method="post">
+							<input type="submit" class="btn btn-outline-primary btn-sm" value="chat with">
+						</form>
+					</td>
+					<td>
+						<form th:action="@{/deleteConversation(to=${conversation.conversationWith}) }" method="post">
+							<input type="hidden" name="fromUser" id="fromUser" th:value="${currentUser.nickname}">
+							<input type="submit" class="btn btn-outline-danger btn-sm" value="delete">
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+	<br>
+	<div th:include="fragments/footer :: footer"></div>
+	<script>
+		var date = new Date();
+		var year = date.getFullYear();
+		document.getElementById("today").innerHTML = "&copy; FRA-UAS SocialApp, "+year;
+	</script> 
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>General Error Page</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/all.css">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-10 col-md-offset-2 text-center">
+			<div class="emoji"><img src="/img/unicorn.gif" width=250></div>
+				<h1 class="text-danger">ERROR</h1>
+				<h2 th:text="${status}">XXX</h2>
+				<h2 th:utext="${error}">error</h2>
+				<a href="/" class="btn btn-light btn-md"><span class="fas fa-home icon-2x pull-left"></span> Home </a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

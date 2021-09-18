@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head">
+<body>
+	<div th:include="fragments/body :: headline (txt='You may start chatting if you like to' )"></div>
+	<div th:include="fragments/body :: nav (all=true)"></div>
+	
+	<section class="container">	
+		<div class="section-title h5">Your conversations with</div>
+		<br>
+
+		<div class="container">
+			<div class="row">
+				<div class="card col-12 col-lg-3 col-md-4 col-sm-6"	th:each="conversation : ${listAllConversations}">
+					<div class="card-body text-center ">
+						<h4 class="card-title" th:text="${conversation.conversationWith}"></h4>
+						<p>
+							<span th:if="${conversation.newMessages > 0}" class="badge badge-primary" th:text="${conversation.newMessages}">NEW</span>
+						</p>
+						<p>
+							<form th:action="@{/messages(to=${conversation.conversationWith}) }" method="post">
+								<input type="submit" class="btn btn-outline-primary btn-sm"	value="chat with">
+							</form>
+						</p>
+				        <p>
+				            <form th:action="@{/deleteConversation(to=${conversation.conversationWith}) }" method="post">
+								<input type="submit" class="btn btn-outline-danger btn-sm" value="delete">
+							</form>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</section>
+	<br>
+	<div th:include="fragments/footer :: footer"></div>
+	<script>
+		var date = new Date();
+		var year = date.getFullYear();
+		document.getElementById("today").innerHTML = "&copy; FRA-UAS SocialApp, "+year;
+	</script> 
+</body>
+</html>

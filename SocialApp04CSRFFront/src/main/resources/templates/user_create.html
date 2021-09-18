@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head">
+	<meta charset="utf-8">
+</head>
+<body>
+
+	<div th:include="fragments/body :: headline (txt='create a new user as admin' )"></div>
+	<div th:include="fragments/body :: nav (all=false)"></div>
+
+
+	<div class="container">
+
+		<h5>new user ...</h5>
+		<form class="bs-example error" th:action="@{/users/create}" th:object="${myform}" method="post" role="form">
+			<input type="text" name="nickname" class="form-control" placeholder="nickname" required="required" autofocus="autofocus">
+			<input type="text" name="email" class="form-control" placeholder="email" required="required">
+			<input type="password" name="password" class="form-control" placeholder="password" required="required">
+			<input type="password" name="passwordRepeated" class="form-control" placeholder="password repeated" required="required">
+			<br>
+			<div class="error">
+				<input type="submit" class="btn btn-outline-primary" th:value="save">
+				<a>
+					<span class="error text-danger" th:if="${error}" th:text="${error}">The email or password you have entered is invalid, try again.</span>
+				</a>
+			</div>
+		</form>
+
+		<br>
+		<hr>
+
+		<h5>list of all users</h5>
+
+		<table class="table table-hover table-bordered table-sm">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">nickname</th>
+					<th scope="col">email</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user : ${users}">
+					<td>
+						<a th:href="${'/users/' + user.id}" th:text="${user.nickname}">empty</a>
+					</td>
+					<td th:text="${user.email}">empty</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+	<br>
+	<div th:include="fragments/footer :: footer"></div>
+		<script>
+			var date = new Date();
+			var year = date.getFullYear();
+			document.getElementById("today").innerHTML = "&copy; FRA-UAS SocialApp, "+year;
+		</script>
+</body>
+
+</html>

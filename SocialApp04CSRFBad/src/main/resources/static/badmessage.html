@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/mystyle.css}" media="screen">	
+	<title>BetterSocialApp</title>
+</head>
+<body>
+	<div class="container">
+		<br>
+		<header>
+			<h4 class="text-center">This is the best SocialApp</h4>
+			<h6 class="text-center">test it for free</h6>
+		</header>
+		<br>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand p-1 mr-5">SocialApp</a> <a
+				class="navbar-nav p-1"> <!--  <form action="/add?to=alice" method="post"> -->
+				<form action="http://localhost:8080/add" method="post">
+					<input type="hidden" name="to" value="alice">
+					<input type="hidden" name="content" value="5678 :: I hate you!">
+					<input type="submit" class="btn btn-outline-primary" value="back to conversation">
+				</form>
+			</a>
+		</nav>
+		<br>
+		<img src="http://localhost:8080/add?to=alice&content=haha">
+		<br>
+		<h6>
+			<span th:if="${currentUser != null}"
+				th:text="${fromUser} + ' chat with ' +  ${toUser}">our service is simply the best</span>
+		</h6>
+		<div></div>
+	</div>
+	<div class="container">
+		<footer>
+			<small id="today"></small>
+		</footer>
+	</div>
+	<script>
+		var date = new Date();
+		var year = date.getFullYear();
+		document.getElementById("today").innerHTML = "&copy; FRA-UAS SocialApp, "+year;
+	</script> 
+</body>
+</html>

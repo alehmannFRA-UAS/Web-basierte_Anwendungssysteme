@@ -1,0 +1,32 @@
+/*!* CSS used here will be applied after bootstrap.css *!*/
+.login-screen{
+    background-color: #D3D3D3;
+    padding: 10px;
+    width: 300px;
+    margin: 0 auto;
+    border-radius: 5px;
+    margin-top: 50px;
+}
+
+h2{
+    text-align: center;
+    margin-top: 0px;
+}
+
+.pass{
+    margin-top: 10px;
+}
+
+.navbar {
+  background-color: #3c8ce7;
+}
+
+.bg-custom{
+    background-color: #e9ecef;
+}
+
+.nav>li>a:focus,
+.nav>li>a:hover {
+    text-decoration: none;
+    background-color: #ffffff;
+}
