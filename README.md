@@ -31,4 +31,4 @@
     - SocialApp06
     - SocialApp06js
 8. Achte Übungen
-    - ...
+    - RESTSocialApp
